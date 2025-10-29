@@ -34,16 +34,16 @@ def calculate_tail_dependence(u, v, q=0.95):
     """
     n = len(u)
     
-    # Upper tail dependence: ?_U(q)
-    # ?_U(q) = Pr(U > q | V > q) = Pr(U > q, V > q) / Pr(V > q)
+    # Upper tail dependence: chi_U(q)
+    # chi_U(q) = Pr(U > q | V > q) = Pr(U > q, V > q) / Pr(V > q)
     mask_upper = v > q
     if np.sum(mask_upper) > 0:
         chi_upper = np.sum((u > q) & mask_upper) / np.sum(mask_upper)
     else:
         chi_upper = np.nan
     
-    # Lower tail dependence: ?_L(q)  
-    # ?_L(q) = Pr(U = 1-q | V = 1-q)
+    # Lower tail dependence: chi_L(q)  
+    # chi_L(q) = Pr(U <= 1-q | V <= 1-q)
     threshold_lower = 1 - q
     mask_lower = v <= threshold_lower
     if np.sum(mask_lower) > 0:
@@ -184,7 +184,7 @@ class FrankCopula:
 
 def cramer_von_mises_copula(u, v, copula, n_bootstrap=100):
     """
-    Cramér-von Mises goodness-of-fit test for copulas.
+    Cramer-von Mises goodness-of-fit test for copulas.
     
     Simplified version using empirical vs theoretical CDF comparison.
     """
@@ -321,7 +321,7 @@ def analyze_basin(basin_id, data_path):
     results['copula_gof_statistic'] = best_gof_stat
     results['copula_gof_pvalue'] = best_pvalue
     
-    print(f"  Best copula: {best_copula} (?={best_theta:.4f}, p={best_pvalue:.4f})")
+    print(f"  Best copula: {best_copula} (theta={best_theta:.4f}, p={best_pvalue:.4f})")
     
     return results
 
