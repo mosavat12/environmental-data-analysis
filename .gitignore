@@ -1,0 +1,10 @@
+# Python
+__pycache__/ *.pyc *.pyo .Python
+# SLURM logs
+log/ *.out *.err
+# Results (temporary files)
+results/temp/ *.tmp
+# Data (too large for GitHub)
+data/ *.csv *.nc *.h5
+# OS
+.DS_Store
